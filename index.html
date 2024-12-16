@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bouncing Image</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black; /* Background color set to black */
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+        }
+        #dvd {
+            position: absolute;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-overlay">because its fun</div>
+    <img id="dvd" src="Screenshot 2024-12-16 091633.png" alt="Bouncing Image">
+    <script>
+        const img = document.getElementById('dvd');
+        let vw = window.innerWidth;
+        let vh = window.innerHeight;
+        let x = Math.random() * (vw - img.width);
+        let y = Math.random() * (vh - img.height);
+        let xSpeed = 2;
+        let ySpeed = 2;
+
+        function animate() {
+            x += xSpeed;
+            y += ySpeed;
+
+            if (x <= 0 || x >= vw - img.width) {
+                xSpeed *= -1;
+            }
+            if (y <= 0 || y >= vh - img.height) {
+                ySpeed *= -1;
+            }
+
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        function fixSize() {
+            vw = window.innerWidth;
+            vh = window.innerHeight;
+            window.resizeTo(vw, vh);
+        }
+
+        // Prevent window resizing
+        window.addEventListener('resize', fixSize);
+
+        // Disable zooming
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        animate();
+    </script>
+</body>
+</html>
