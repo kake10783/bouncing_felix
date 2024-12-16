@@ -33,10 +33,10 @@
     <img id="dvd" src="Screenshot 2024-12-16 091633.png" alt="Bouncing Image">
     <script>
         const img = document.getElementById('dvd');
-        let vw = window.innerWidth;
-        let vh = window.innerHeight;
-        let x = Math.random() * (vw - img.width);
-        let y = Math.random() * (vh - img.height);
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        let x = (vw - img.width) / 2; // Center the image horizontally
+        let y = (vh - img.height) / 2; // Center the image vertically
         let xSpeed = 2;
         let ySpeed = 2;
 
